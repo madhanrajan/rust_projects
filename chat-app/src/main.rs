@@ -49,14 +49,11 @@ async fn events(queue: &State<Sender<Message>>, mut end: Shutdown) -> EventStrea
     }
 }
 
-
 #[launch]
 fn rocket() -> Rocket<Build> {
     rocket::build()
         .manage(channel::<Message>(1024).0)
         .mount("/", routes![world, post, events])
-        .mount("/", FileServer::from(relative!("static")))
-        
-        
+        .mount("/", FileServer::from(relative!("static")))       
 }
 
