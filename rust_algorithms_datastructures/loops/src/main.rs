@@ -66,7 +66,6 @@ fn main() {
         println!("{}",i)
     }
     
-    
 }
 
 fn loop_testbed(){
