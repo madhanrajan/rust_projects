@@ -54,6 +54,29 @@ impl<T> Stack<T>{
         }
 
     }
+
+    fn peek(&self) -> Option<&T>{
+
+        if let Some(v) = &self.top{
+            Some(&v.data)
+        }else{
+            None
+        }
+
+    }
+
+    fn peek_next(&self) -> Option<&T>{
+        
+        match &self.top {
+            Some(top) => match &top.next {
+                Some(next) => Some(&next.data),
+                None => None,
+            }
+            None => None,
+        }
+
+    }
+
 }
 
 fn main() {
@@ -63,11 +86,26 @@ fn main() {
     let mut stk = Stack::<u32>::new();
     println!("{}",stk.is_empty());
     stk.push(5);
-    println!("{}",stk.is_empty());
+    
+    if !stk.is_empty(){
+
+        if let Some(&v) = stk.peek(){
+            println!("Stack is not empty and has value {}",v);
+        }
+
+    }
+
     if let Some(val) = stk.pop(){
         println!("Value of {} is removed. Stack is empty: {}", val, stk.is_empty());
     };
-    
 
+    let mut stk = Stack::<u32>::new();
+
+    stk.push(4);
+    stk.push(2);
+
+    if let Some(&v) = stk.peek_next() {
+        println!("Stack next value is {}", v)
+    }
 
 }
