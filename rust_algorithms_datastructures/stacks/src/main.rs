@@ -88,11 +88,9 @@ fn main() {
     stk.push(5);
     
     if !stk.is_empty(){
-
         if let Some(&v) = stk.peek(){
             println!("Stack is not empty and has value {}",v);
         }
-
     }
 
     if let Some(val) = stk.pop(){
