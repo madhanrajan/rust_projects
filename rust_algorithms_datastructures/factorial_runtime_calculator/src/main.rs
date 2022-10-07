@@ -25,8 +25,10 @@ fn main() {
     let duration = start.elapsed();
 
     let start_alt = Instant::now();
-    let _ = factorial(10);
-    let duration_alt = start.elapsed();
+    let _ = factorial_alt(10,1);
+    let duration_alt = start_alt.elapsed();
+
+    
 
     println!("Time elapsed on function 1 is {:?}", duration);
     println!("Time elapsed on function 2 is {:?}", duration_alt);
