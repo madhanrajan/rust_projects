@@ -40,6 +40,20 @@ impl<T> Stack<T>{
 
         self.top = Some(node);
     }
+
+    fn pop(&mut self) -> Option<T>{
+
+        if let Some(v) = replace(&mut self.top, None){
+            self.top = match v.next {
+                Some(n) => Some(*n),
+                None => None
+            };
+            Some(v.data)
+        }else{
+            None
+        }
+
+    }
 }
 
 fn main() {
@@ -50,5 +64,10 @@ fn main() {
     println!("{}",stk.is_empty());
     stk.push(5);
     println!("{}",stk.is_empty());
+    if let Some(val) = stk.pop(){
+        println!("Value of {} is removed. Stack is empty: {}", val, stk.is_empty());
+    };
+    
+
 
 }
