@@ -22,7 +22,21 @@ fn main() {
     if let Some(ref mut v) = ll.next {
         v.add_up(8);
     }
-    
 
     println!("This is a rust linked list: {:?}",ll);
+
+    // Vector below has capacity of 2
+    let mut v = Vec::new();
+    v.push("hello".to_string());
+    v.push("goodbye".to_string());
+    println!("v.len = {} capacity = {}",v.len(),v.capacity());
+
+    // Vector below has capacity of 2
+    let mut v = Vec::with_capacity(100);
+    v.push("hello".to_string());
+    v.push("goodbye".to_string());
+    println!("v.len = {} capacity = {}",v.len(),v.capacity());
+    
+
+    
 }
