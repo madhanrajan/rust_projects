@@ -1,6 +1,6 @@
 
 #[derive(Debug, Clone)]
-struct Person{
+pub struct Person{
     name: String,
     age: i32
 }
@@ -18,9 +18,7 @@ impl Person{
         self.age += 1; 
     }
 
-    pub fn destroy(self){
-        
-    }
+    pub fn destroy(self){}
 
 }
 
@@ -30,7 +28,19 @@ fn main() {
     println!("{}",p.get());
     p.increment_age();
     println!("{}",p.get());
-    p.destroy();
+    // p.destroy();
 
+    let age = get_age(&p);
+    // Increment function doesn't work before there is already a reference to the pointer
+    // p.increment_age();
 
+    
+    println!("Person's age is {}", age);
+    p.increment age();
+
+    
+}
+
+pub fn get_age(s: &Person) -> &i32 {
+    &s.age
 }

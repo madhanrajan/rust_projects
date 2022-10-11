@@ -1,0 +1,11 @@
+[package]
+name = "do_not_use_this_package"
+version = "0.1.0"
+edition = "2021"
+keywords = ["do" ,"not" ,"use" ]
+description = "Do not use this crate"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
