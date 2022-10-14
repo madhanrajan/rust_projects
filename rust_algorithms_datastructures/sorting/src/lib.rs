@@ -22,52 +22,50 @@ pub fn bubble_sort<T: PartialOrd + Debug> (v: &mut [T]){
 
 pub fn merge_sort<T: PartialOrd + Debug>(mut v: Vec<T>) -> Vec<T>{
     
+    let mut total: Vec<Vec<i32>> = Vec::new();
 
-    if v.len() <= 1{
-        return v;
-    }
+    let mut temp_array: Vec<i32> = Vec::new();
 
-    let mut res = Vec::with_capacity(v.len());
-    let b = v.split_off(v.len()/2);
-    let a = merge_sort(v);
-    let b = merge_sort(b);
+    for (i, val) in v.enumerate(){
 
-    let a_it = a.into_iter();
-    let b_it = b.into_iter();
+        temp_array.push(val);
 
-    let a_peek = a_it.next();
-    let b_peek = b_it.next();
-    
-    loop {
-        match a_peek {
-            Some(ref a_val) => match b_peek{
-                Some(ref b_val) => {
-                    if b_val < a_val {
-                        res.push(b_peek.take().unwrap());
-                    }else{
-                        res.push(a_peek.take().unwrap());
-                        a_peek = a_it.next();
-                    }
-                }
-                None => {
-                    res.push(a_peek.take().unwrap());
-                    res.extend(a_it);
-                    return res;
-                }
-
-            }
-            None =>{
-                if let Some(b_val) = b_peek {
-                    res.push(b_val);
-                }
-
-                res.extend(b_it);
-            }
+        if i %= 2 == 0 && i != 0{
+            total.push(temp_array);
+            temp_array = Vec::new();
         }
 
+    }
+
+    temp_array.remove(0);
+
+    let mut count = 2;
+
+    while count < v.len(){
+        for j in total {
+            bubble_sort(j);
+        }
 
     }
+
+
+
 }
+
+pub fn pivot<T: PartialOrd + Debug>(v: &mut [T]) -> usize {
+
+    let mut p = 0;
+    for i in 1..v.len(){
+        if v[i] < v[p] {
+            v.swap(p+1, i);
+            v.swap(p,p+1);
+            p += 1
+        }
+    }
+    p
+}
+
+
 
 #[cfg(test)]
 mod tests {
@@ -82,10 +80,18 @@ mod tests {
     }
 
     #[test]
-    fn it_works() {
+    fn test_bubble_sort() {
 
         let mut v = vec![3, -1, -2, 5, 7];
         bubble_sort(&mut v);
         assert_eq!(v, vec![-2, -1, 3, 5, 7]);
+    }
+
+
+    fn test_pivot(){
+        let mut v = vec![4,6,1,8,11,13,3];
+        let p = pivot(&mut v);
+
+        assert_eq!(v, vec![1,3,4,6,8,11,13]);
     }
 }
