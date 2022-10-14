@@ -62,7 +62,7 @@ pub fn pivot<T: PartialOrd + Debug>(v: &mut [T]) -> usize {
             p += 1
         }
     }
-    p
+    
 }
 
 
